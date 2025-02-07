@@ -15,7 +15,7 @@ tags:
 
 NotYourBoy 的 Blog 就这么开通了。
 
-[跳过废话，直接看技术实现 ](#build) 
+[跳过废话，直接看技术实现 ](#build)
 
 2025 年，NotYourBoy 总算有个地方可以好好写点东西了。
 
