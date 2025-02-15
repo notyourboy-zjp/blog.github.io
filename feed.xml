@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NotYourBoy Blog</title>
+    <description>这里是 @NotYourBoy张佳鹏 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员</description>
+    <link>https://blog.zhangjiapeng.cn/</link>
+    <atom:link href="https://blog.zhangjiapeng.cn/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 15 Feb 2025 09:01:02 +0000</pubDate>
+    <lastBuildDate>Sat, 15 Feb 2025 09:01:02 +0000</lastBuildDate>
+    <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>deepseek</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“AI 已来. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;回家过个春节，总应该写点什么 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;DeepSeek国产大模型震荡整个AI行业：程序员视角下的思考与对比&lt;/p&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;作为一名程序员，我对人工智能一直有着浓厚的兴趣。近年来，AI技术的飞速发展让我深感震撼，尤其是大模型的出现，更是为软件开发和应用带来了全新的可能性。最近，DeepSeek国产大模型的崛起引起了我的极大关注。它不仅在技术上取得了突破，更在开源策略和成本控制方面为程序员群体带来了前所未有的机遇。以下是我从程序员的角度对DeepSeek的一些思考和看法，同时结合了与OpenAI的ChatGPT和Google的Gemini的对比分析。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;deepseekopenai和gemini的对比&quot;&gt;DeepSeek、OpenAI和Gemini的对比&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;技术架构&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：采用混合架构，结合深度学习与强化学习技术，注重高效性和灵活性。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：基于Transformer架构，以强大的语言生成能力和上下文理解能力著称。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态AI模型，能够处理文本、图像、音频和视频等多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;多模态能力&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：主要基于文本，但可以通过与其他工具集成实现多模态功能。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：主要以文本为基础，无法处理或生成图像、音频或视频。&lt;/li&gt;
+  &lt;li&gt;Gemini：完全多模态，能够处理和生成多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;性能与效率&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：在计算效率上表现优异，适合资源有限的环境。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：在文本任务上表现出色，但对计算资源需求较大。&lt;/li&gt;
+  &lt;li&gt;Gemini：在多模态任务中表现突出，但需要显著的计算能力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：适合企业级应用，如数据分析、领域特定的聊天机器人。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：广泛应用于内容创作、客户支持、编码辅助等通用任务。&lt;/li&gt;
+  &lt;li&gt;Gemini：适合科学研究、多媒体内容生成和复杂问题解决。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;开源与定制化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：开源特性使其易于集成到企业系统中，并支持领域特定的定制化。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：提供API用于集成，但在特定领域的定制化方面有限。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态应用的定制化程度高，但可能需要专门的知识。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deepseek的优势与挑战&quot;&gt;DeepSeek的优势与挑战&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优势&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;高效性与成本效益：DeepSeek在计算效率和成本控制方面表现出色，适合大规模企业级部署。&lt;/li&gt;
+  &lt;li&gt;开源与定制化：开源特性使开发者可以自由定制和优化模型，推动技术的快速迭代。&lt;/li&gt;
+  &lt;li&gt;多语言支持：在中文语境下表现优异，生成的文本更加符合中文表达习惯。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;挑战&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;多模态能力不足：在图像和视频处理方面，DeepSeek的性能略逊于Gemini。&lt;/li&gt;
+  &lt;li&gt;国际竞争压力：作为新兴的国际竞争者，DeepSeek需要在国际市场上进一步提升品牌影响力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;未来展望&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek的崛起为AI行业带来了新的发展机遇。其低成本和开源的特点有望推动AI应用的普及，促进更多创新应用的出现。同时，DeepSeek的成功也为其他国家的科技企业提供了追赶的机会，推动了全球科技合作的可能性。作为一名程序员，我期待看到更多像DeepSeek这样的开源项目出现。开源不仅能够加速技术的发展，还能够促进全球开发者之间的交流与合作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;结语&quot;&gt;结语&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek国产大模型的崛起不仅在技术上取得了突破，还在商业和生态层面引发了行业震荡。其低成本、高性能和开源的特点，为AI行业带来了新的发展方向。作为一名程序员，我深感这一事件的重要性和深远影响。DeepSeek的出现为我和其他开发者提供了更多的机会和可能性，让我们能够以更低的成本探索AI技术的边界。未来，随着DeepSeek的不断发展，其对全球AI行业的影响将更加深远。我期待看到更多像DeepSeek这样的创新力量，推动行业不断向前发展。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;应用那句话，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;淘汰程序员的不是AI，而是用AI的程序员&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;所以，拥抱AI，拥抱开源，拥抱未来。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Feb 2025 21:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</guid>
+        
+        <category>AI -deepseek</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello 2025</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;NotYourBoy 的 Blog 就这么开通了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;跳过废话，直接看技术实现 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2025 年，NotYourBoy 总算有个地方可以好好写点东西了。&lt;/p&gt;
+
+&lt;p&gt;作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;p&gt;接下来说说搭建这个博客的技术细节。&lt;/p&gt;
+
+&lt;p&gt;正好之前就有关注过 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速 Building Blog 的技术方案，非常轻松时尚。&lt;/p&gt;
+
+&lt;p&gt;其优点非常明显：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt; 带来的优雅写作体验&lt;/li&gt;
+  &lt;li&gt;非常熟悉的 Git workflow ，&lt;strong&gt;Git Commit 即 Blog Post&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
+    &lt;ul&gt;
+      &lt;li&gt;如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Jekyll 的自定制非常容易，基本就是个模版引擎&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本来觉得最大的缺点可能是 GitHub 在国内访问起来太慢，所以第二天一起床就到 GitCafe(Chinese GitHub Copy，现在被 Coding 收购了) 迁移了一个&lt;a href=&quot;http://NotYourBoypro.coding.me&quot;&gt;镜像&lt;/a&gt;出来，结果还是巨慢。&lt;/p&gt;
+
+&lt;p&gt;哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 &lt;strong&gt;pending 在了 Google Fonts&lt;/strong&gt; 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。&lt;br /&gt;
+忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手&lt;/p&gt;
+
+&lt;p&gt;大的 Jekyll 主题上直接 fork 了 Clean Blog（这个主题也相当有名，就不多赘述了。唯一的缺点大概就是没有标签支持，于是我给它补上了。）&lt;/p&gt;
+
+&lt;p&gt;本地调试环境需要 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功&lt;/p&gt;
+
+&lt;p&gt;Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 SCSS 些），&lt;strong&gt;不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在淘宝参与的团队 CSS 框架差多了……&lt;/strong&gt;所以为了体验，也补了不少 CSS 进去&lt;/p&gt;
+
+&lt;p&gt;最后就进入了耗时反而最长的&lt;strong&gt;做图、写字&lt;/strong&gt;阶段，也算是进入了&lt;strong&gt;写博客&lt;/strong&gt;的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。&lt;/p&gt;
+
+&lt;p&gt;第二天考虑中文字体的渲染，fork 了 &lt;a href=&quot;http://www.typeisbeautiful.com/&quot;&gt;Type is Beautiful&lt;/a&gt; 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;font&lt;/code&gt; CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。&lt;/p&gt;
+
+&lt;h2 id=&quot;后记&quot;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;回顾这个博客的诞生，纯粹是出于个人兴趣。在知乎相关问题上回答并获得一定的 star 后，我决定把这个博客主题当作一个小小的开源项目来维护。&lt;/p&gt;
+
+&lt;p&gt;在经历 v1.0 - v1.5 的蜕变后，这个博客主题愈发完整，不但增加了诸多 UI 层的优化（opinionated）；在代码层面，更加丰富的配置项也使得这个主题拥有了更好的灵活性与可拓展性。而作为一个开源项目，我也积极的为其完善文档与解决 issue。&lt;/p&gt;
+
+&lt;p&gt;如果你恰好逛到了这里，希望你也能喜欢这个博客主题。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 03 Jan 2025 12:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</guid>
+        
+        <category>Meta</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
