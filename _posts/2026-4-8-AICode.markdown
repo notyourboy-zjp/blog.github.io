@@ -4,7 +4,7 @@ title:      "2026 AI编程工具实测"
 subtitle:   " \"Cursor、TRAE、文心快码到底怎么选？\""
 date:       2026-04-08 21:00:00
 author:     "NotYourBoy"
-header-img: "img/post-bg-programming.jpg"
+header-img: "img/post-bg-universe.jpg"
 catalog: true
 tags:
     - AI
@@ -160,7 +160,7 @@ UI设计稿直接生成React/Vue组件，前端开发效率翻倍。
 
 ### 终极“钞能力”方案
 
-```text
+```
 Cursor + 文心快码 双持
 
 - Cursor做主力IDE（体验最佳）
