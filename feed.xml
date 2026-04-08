@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NotYourBoy Blog</title>
+    <description>这里是 @NotYourBoy张佳鹏 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员</description>
+    <link>https://blog.zhangjiapeng.cn/</link>
+    <atom:link href="https://blog.zhangjiapeng.cn/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 08 Apr 2026 13:06:01 +0000</pubDate>
+    <lastBuildDate>Wed, 08 Apr 2026 13:06:01 +0000</lastBuildDate>
+    <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>2026 AI编程工具实测</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“工欲善其事，必先利其器。”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#结论&quot;&gt;先上结论，再细聊&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;最近好多朋友问我：“现在AI编程工具这么多，到底哪个好用？”&lt;/p&gt;
+
+&lt;p&gt;说实话，2026年的AI编程工具已经不是“哪个补全代码最准”的问题了——每个工具都有自己的脾气和套路。我花时间深度体验了一圈，给大家唠唠我的真实感受。&lt;/p&gt;
+
+&lt;p id=&quot;结论&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;一先说结论三句话选工具&quot;&gt;一、先说结论：三句话选工具&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;你是哪种人&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;闭眼选这个&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;为啥？&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;不差钱、追求极致体验&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Cursor&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;交互最顺滑，用过的都说回不去&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;国内开发者、想省钱&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;TRAE国内版&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;免费够用，还有SOLO模式这个王炸&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;重视代码规范、团队协作&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;文心快码&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;SPEC模式强制先文档后代码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Java/Go选手、阿里云用户&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;通义灵码&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;单测生成强无敌&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;学生党、刚入门、零预算&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;豆包AI编程&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;完全免费，浏览器就能用&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;二cursor贵有贵的道理&quot;&gt;二、Cursor：贵有贵的道理&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;Cursor是我用过&lt;strong&gt;交互最舒服&lt;/strong&gt;的AI IDE。它的AI不是“呼出对话框”才干活，而是像空气一样无处不在——你写代码时它默默补全，你改代码时它自动理解上下文。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cursor 3的“智能体工作区”&lt;/strong&gt; 是2026年最让我惊喜的功能。简单说就是：你可以让AI帮你完成一个复杂的开发任务，然后关掉电脑，第二天换个设备继续，AI还记得上次干到哪了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;跨设备、跨仓库、持续运行，这感觉像多了一个远程队友。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;槽点在哪&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;贵！&lt;/strong&gt; Pro要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$20/月&lt;/code&gt;，Pro+要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$60/月&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;国内用需要特殊网络环境，时不时会抽风&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;适合谁&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;每天8小时泡在IDE里的专业开发者。如果你靠写代码吃饭，这个钱值得花。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;三trae字节的价格屠夫&quot;&gt;三、TRAE：字节的“价格屠夫”&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪-1&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;TRAE是国内最有希望挑战Cursor的选手。核心优势就三个字：&lt;strong&gt;便宜、好用、接地气&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;solo模式是王炸&quot;&gt;SOLO模式是王炸&lt;/h4&gt;
+
+&lt;p&gt;它有两个AI智能体：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;智能体&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;功能&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;SOLO Coder&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;帮你处理复杂项目的代码迭代、修Bug、重构&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;SOLO Builder&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;从0到1，一句话生成完整项目&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;实测：输入“做一个TODO List应用，支持用户登录和数据云端存储”，它真的能从需求分析、架构设计、代码编写一路干到部署。&lt;strong&gt;相当于白嫖了一个全栈开发&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;豆包seed-code模型也很有诚意&quot;&gt;豆包Seed-Code模型也很有诚意&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;上传一张手绘的网页草图，它就能生成可运行的前端代码&lt;/li&gt;
+  &lt;li&gt;成本超低，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0-32k tokens&lt;/code&gt;的任务只要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.34元&lt;/code&gt;，而Claude要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4.05元&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;槽点在哪-1&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;p&gt;部分VSCode插件用不了，比如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Remote SSH&lt;/code&gt;。如果你重度依赖某些插件，换过来会有阵痛。&lt;/p&gt;
+
+&lt;h3 id=&quot;适合谁-1&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;国内开发者、预算有限但想用好工具的、想快速从0到1做个产品原型的人。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;💡 &lt;strong&gt;小贴士&lt;/strong&gt;：TRAE国内版免费，国际版首月&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$3&lt;/code&gt;次月&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$10&lt;/code&gt;。国内版用豆包模型够用了，想用Claude就切国际版。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;四文心快码代码洁癖患者的福音&quot;&gt;四、文心快码：代码洁癖患者的福音&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪-2&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;百度的文心快码最大的特点是&lt;strong&gt;SPEC模式&lt;/strong&gt;——它会让AI先写设计文档，你确认后再生成代码。这样产出的代码不会成为“别人看不懂的屎山”。&lt;/p&gt;
+
+&lt;h4 id=&quot;multi-agent矩阵&quot;&gt;Multi-Agent矩阵&lt;/h4&gt;
+
+&lt;p&gt;三个AI分工合作：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;智能体&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;职责&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Zulu&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责代码生成&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Plan&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责任务规划&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Architect&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责架构设计&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;IDC评测里C++和Java场景拿了&lt;strong&gt;满分&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;figma2code也很实用&quot;&gt;Figma2Code也很实用&lt;/h4&gt;
+
+&lt;p&gt;UI设计稿直接生成React/Vue组件，前端开发效率翻倍。&lt;/p&gt;
+
+&lt;h3 id=&quot;槽点在哪-2&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;p&gt;目前完全免费？我没找到付费入口。但百度的产品你懂的，哪天突然收费也不奇怪。&lt;/p&gt;
+
+&lt;h3 id=&quot;适合谁-2&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;团队协作、对代码规范有要求的项目。如果你是那种“看到混乱代码会暴躁”的人，它会拯救你。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;五其他选手速览&quot;&gt;五、其他选手速览&lt;/h2&gt;
+
+&lt;h3 id=&quot;通义灵码阿里系选手&quot;&gt;通义灵码：阿里系选手&lt;/h3&gt;
+
+&lt;p&gt;在&lt;strong&gt;Java和Go&lt;/strong&gt;场景下表现很强。Quest Mode支持端到端自主编程，单元测试生成准确率行业领先。适合阿里云用户。&lt;/p&gt;
+
+&lt;h3 id=&quot;腾讯云代码助手小程序神器&quot;&gt;腾讯云代码助手：小程序神器&lt;/h3&gt;
+
+&lt;p&gt;对微信小程序API的理解准确率达到&lt;strong&gt;98.7%&lt;/strong&gt;，永久免费，企业版&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;936元/人/年&lt;/code&gt;。适合小程序开发者。&lt;/p&gt;
+
+&lt;h3 id=&quot;豆包ai编程零门槛入门&quot;&gt;豆包AI编程：零门槛入门&lt;/h3&gt;
+
+&lt;p&gt;主打&lt;strong&gt;轻量级+完全免费&lt;/strong&gt;，Cloud IDE零配置，浏览器打开就能写代码。适合学生党和初学者。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;六我的终极建议&quot;&gt;六、我的终极建议&lt;/h2&gt;
+
+&lt;h3 id=&quot;如果你是个人开发者&quot;&gt;如果你是个人开发者&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;情况&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;推荐&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;不差钱&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cursor Pro&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;想省钱&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE国内版&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;想快速做产品&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE国际版 + SOLO Builder&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;如果你是团队企业&quot;&gt;如果你是团队/企业&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;情况&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;推荐&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;重视代码规范&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;文心快码&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Java/Go技术栈&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;通义灵码&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;小程序开发&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;腾讯云代码助手&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;数据合规要求高&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE企业版&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;终极钞能力方案&quot;&gt;终极“钞能力”方案&lt;/h3&gt;
+
+&lt;p&gt;Cursor + 文心快码 双持&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cursor做主力IDE（体验最佳）&lt;/li&gt;
+  &lt;li&gt;文心快码做补充（Figma2Code、SPEC模式）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个管爽，一个管规范。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Wed, 08 Apr 2026 21:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2026/04/08/AICode/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2026/04/08/AICode/</guid>
+        
+        <category>AI</category>
+        
+        <category>编程工具</category>
+        
+        <category>Cursor</category>
+        
+        <category>TRAE</category>
+        
+        <category>文心快码</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>deepseek</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“AI 已来. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;回家过个春节，总应该写点什么 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;DeepSeek国产大模型震荡整个AI行业：程序员视角下的思考与对比&lt;/p&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;作为一名程序员，我对人工智能一直有着浓厚的兴趣。近年来，AI技术的飞速发展让我深感震撼，尤其是大模型的出现，更是为软件开发和应用带来了全新的可能性。最近，DeepSeek国产大模型的崛起引起了我的极大关注。它不仅在技术上取得了突破，更在开源策略和成本控制方面为程序员群体带来了前所未有的机遇。以下是我从程序员的角度对DeepSeek的一些思考和看法，同时结合了与OpenAI的ChatGPT和Google的Gemini的对比分析。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;deepseekopenai和gemini的对比&quot;&gt;DeepSeek、OpenAI和Gemini的对比&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;技术架构&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：采用混合架构，结合深度学习与强化学习技术，注重高效性和灵活性。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：基于Transformer架构，以强大的语言生成能力和上下文理解能力著称。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态AI模型，能够处理文本、图像、音频和视频等多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;多模态能力&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：主要基于文本，但可以通过与其他工具集成实现多模态功能。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：主要以文本为基础，无法处理或生成图像、音频或视频。&lt;/li&gt;
+  &lt;li&gt;Gemini：完全多模态，能够处理和生成多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;性能与效率&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：在计算效率上表现优异，适合资源有限的环境。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：在文本任务上表现出色，但对计算资源需求较大。&lt;/li&gt;
+  &lt;li&gt;Gemini：在多模态任务中表现突出，但需要显著的计算能力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：适合企业级应用，如数据分析、领域特定的聊天机器人。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：广泛应用于内容创作、客户支持、编码辅助等通用任务。&lt;/li&gt;
+  &lt;li&gt;Gemini：适合科学研究、多媒体内容生成和复杂问题解决。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;开源与定制化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：开源特性使其易于集成到企业系统中，并支持领域特定的定制化。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：提供API用于集成，但在特定领域的定制化方面有限。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态应用的定制化程度高，但可能需要专门的知识。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deepseek的优势与挑战&quot;&gt;DeepSeek的优势与挑战&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优势&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;高效性与成本效益：DeepSeek在计算效率和成本控制方面表现出色，适合大规模企业级部署。&lt;/li&gt;
+  &lt;li&gt;开源与定制化：开源特性使开发者可以自由定制和优化模型，推动技术的快速迭代。&lt;/li&gt;
+  &lt;li&gt;多语言支持：在中文语境下表现优异，生成的文本更加符合中文表达习惯。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;挑战&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;多模态能力不足：在图像和视频处理方面，DeepSeek的性能略逊于Gemini。&lt;/li&gt;
+  &lt;li&gt;国际竞争压力：作为新兴的国际竞争者，DeepSeek需要在国际市场上进一步提升品牌影响力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;未来展望&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek的崛起为AI行业带来了新的发展机遇。其低成本和开源的特点有望推动AI应用的普及，促进更多创新应用的出现。同时，DeepSeek的成功也为其他国家的科技企业提供了追赶的机会，推动了全球科技合作的可能性。作为一名程序员，我期待看到更多像DeepSeek这样的开源项目出现。开源不仅能够加速技术的发展，还能够促进全球开发者之间的交流与合作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;结语&quot;&gt;结语&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek国产大模型的崛起不仅在技术上取得了突破，还在商业和生态层面引发了行业震荡。其低成本、高性能和开源的特点，为AI行业带来了新的发展方向。作为一名程序员，我深感这一事件的重要性和深远影响。DeepSeek的出现为我和其他开发者提供了更多的机会和可能性，让我们能够以更低的成本探索AI技术的边界。未来，随着DeepSeek的不断发展，其对全球AI行业的影响将更加深远。我期待看到更多像DeepSeek这样的创新力量，推动行业不断向前发展。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;应用那句话，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;淘汰程序员的不是AI，而是不会用AI的程序员&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;所以，拥抱AI，拥抱开源，拥抱未来。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Feb 2025 21:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</guid>
+        
+        <category>AI -deepseek</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello 2025</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;NotYourBoy 的 Blog 就这么开通了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;跳过废话，直接看技术实现 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2025 年，NotYourBoy 总算有个地方可以好好写点东西了。&lt;/p&gt;
+
+&lt;p&gt;作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;p&gt;接下来说说搭建这个博客的技术细节。&lt;/p&gt;
+
+&lt;p&gt;正好之前就有关注过 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速 Building Blog 的技术方案，非常轻松时尚。&lt;/p&gt;
+
+&lt;p&gt;其优点非常明显：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt; 带来的优雅写作体验&lt;/li&gt;
+  &lt;li&gt;非常熟悉的 Git workflow ，&lt;strong&gt;Git Commit 即 Blog Post&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
+    &lt;ul&gt;
+      &lt;li&gt;如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Jekyll 的自定制非常容易，基本就是个模版引擎&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本来觉得最大的缺点可能是 GitHub 在国内访问起来太慢，所以第二天一起床就到 GitCafe(Chinese GitHub Copy，现在被 Coding 收购了) 迁移了一个&lt;a href=&quot;http://NotYourBoypro.coding.me&quot;&gt;镜像&lt;/a&gt;出来，结果还是巨慢。&lt;/p&gt;
+
+&lt;p&gt;哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 &lt;strong&gt;pending 在了 Google Fonts&lt;/strong&gt; 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。&lt;br /&gt;
+忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手&lt;/p&gt;
+
+&lt;p&gt;大的 Jekyll 主题上直接 fork 了 Clean Blog（这个主题也相当有名，就不多赘述了。唯一的缺点大概就是没有标签支持，于是我给它补上了。）&lt;/p&gt;
+
+&lt;p&gt;本地调试环境需要 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功&lt;/p&gt;
+
+&lt;p&gt;Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 SCSS 些），&lt;strong&gt;不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在淘宝参与的团队 CSS 框架差多了……&lt;/strong&gt;所以为了体验，也补了不少 CSS 进去&lt;/p&gt;
+
+&lt;p&gt;最后就进入了耗时反而最长的&lt;strong&gt;做图、写字&lt;/strong&gt;阶段，也算是进入了&lt;strong&gt;写博客&lt;/strong&gt;的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。&lt;/p&gt;
+
+&lt;p&gt;第二天考虑中文字体的渲染，fork 了 &lt;a href=&quot;http://www.typeisbeautiful.com/&quot;&gt;Type is Beautiful&lt;/a&gt; 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;font&lt;/code&gt; CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。&lt;/p&gt;
+
+&lt;h2 id=&quot;后记&quot;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;回顾这个博客的诞生，纯粹是出于个人兴趣。在知乎相关问题上回答并获得一定的 star 后，我决定把这个博客主题当作一个小小的开源项目来维护。&lt;/p&gt;
+
+&lt;p&gt;在经历 v1.0 - v1.5 的蜕变后，这个博客主题愈发完整，不但增加了诸多 UI 层的优化（opinionated）；在代码层面，更加丰富的配置项也使得这个主题拥有了更好的灵活性与可拓展性。而作为一个开源项目，我也积极的为其完善文档与解决 issue。&lt;/p&gt;
+
+&lt;p&gt;如果你恰好逛到了这里，希望你也能喜欢这个博客主题。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 03 Jan 2025 12:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</guid>
+        
+        <category>Meta</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="这里是 @NotYourBoy张佳鹏 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员">
+    <meta name="keywords" content="张佳鹏, NotYourBoy张佳鹏, NotYourBoy, 鬼栈, notyourboy, @notyourboy, 张佳鹏的博客, NotYourBoy Blog, 博客, 个人网站, 互联网, Web, JavaScript, React, React Native, 前端, 设计">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+        content="2026 AI编程工具实测 - 张佳鹏的博客 | NotYourBoy Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  “工欲善其事，必先利其器。”
+
+">
+    
+    <meta property="article:published_time" content=" 2026-04-08T21:00:00Z">
+    
+    
+    <meta property="article:author" content="NotYourBoy">
+    
+    
+    <meta property="article:tag" content="AI">
+    
+    <meta property="article:tag" content="编程工具">
+    
+    <meta property="article:tag" content="Cursor">
+    
+    <meta property="article:tag" content="TRAE">
+    
+    <meta property="article:tag" content="文心快码">
+    
+    
+    <meta property="og:image" content="https://blog.zhangjiapeng.cn/img/avatar.jpg">
+    <meta property="og:url" content="https://blog.zhangjiapeng.cn/2026/04/08/AICode/">
+    <meta property="og:site_name" content="张佳鹏的博客 | NotYourBoy Blog">
+
+    <title>2026 AI编程工具实测 - 张佳鹏的博客 | NotYourBoy Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://blog.zhangjiapeng.cn/2026/04/08/AICode/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/zjp-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- <script></script> -->
+
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-6487568398225121" asyncsrc="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">NotYourBoy Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-universe.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-universe.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+
+
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=AI" title="AI">AI</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7" title="编程工具">编程工具</a>
+                        
+                        <a class="tag" href="/archive/?tag=Cursor" title="Cursor">Cursor</a>
+                        
+                        <a class="tag" href="/archive/?tag=TRAE" title="TRAE">TRAE</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%96%87%E5%BF%83%E5%BF%AB%E7%A0%81" title="文心快码">文心快码</a>
+                        
+                    </div>
+                    <h1>2026 AI编程工具实测</h1>
+                    
+                    <h2 class="subheading"> "Cursor、TRAE、文心快码到底怎么选？"</h2>
+                    <span class="meta">Posted by NotYourBoy on April 8, 2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                <!--  -->
+
+				<blockquote>
+  <p>“工欲善其事，必先利其器。”</p>
+</blockquote>
+
+<p><a href="#结论">先上结论，再细聊</a></p>
+
+<p>最近好多朋友问我：“现在AI编程工具这么多，到底哪个好用？”</p>
+
+<p>说实话，2026年的AI编程工具已经不是“哪个补全代码最准”的问题了——每个工具都有自己的脾气和套路。我花时间深度体验了一圈，给大家唠唠我的真实感受。</p>
+
+<p id="结论"></p>
+
+<h2 id="一先说结论三句话选工具">一、先说结论：三句话选工具</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">你是哪种人</th>
+      <th style="text-align: left">闭眼选这个</th>
+      <th style="text-align: left">为啥？</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>不差钱、追求极致体验</strong></td>
+      <td style="text-align: left">Cursor</td>
+      <td style="text-align: left">交互最顺滑，用过的都说回不去</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>国内开发者、想省钱</strong></td>
+      <td style="text-align: left">TRAE国内版</td>
+      <td style="text-align: left">免费够用，还有SOLO模式这个王炸</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>重视代码规范、团队协作</strong></td>
+      <td style="text-align: left">文心快码</td>
+      <td style="text-align: left">SPEC模式强制先文档后代码</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Java/Go选手、阿里云用户</strong></td>
+      <td style="text-align: left">通义灵码</td>
+      <td style="text-align: left">单测生成强无敌</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>学生党、刚入门、零预算</strong></td>
+      <td style="text-align: left">豆包AI编程</td>
+      <td style="text-align: left">完全免费，浏览器就能用</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="二cursor贵有贵的道理">二、Cursor：贵有贵的道理</h2>
+
+<h3 id="它好在哪">它好在哪？</h3>
+
+<p>Cursor是我用过<strong>交互最舒服</strong>的AI IDE。它的AI不是“呼出对话框”才干活，而是像空气一样无处不在——你写代码时它默默补全，你改代码时它自动理解上下文。</p>
+
+<p><strong>Cursor 3的“智能体工作区”</strong> 是2026年最让我惊喜的功能。简单说就是：你可以让AI帮你完成一个复杂的开发任务，然后关掉电脑，第二天换个设备继续，AI还记得上次干到哪了。</p>
+
+<blockquote>
+  <p>跨设备、跨仓库、持续运行，这感觉像多了一个远程队友。</p>
+</blockquote>
+
+<h3 id="槽点在哪">槽点在哪？</h3>
+
+<ul>
+  <li><strong>贵！</strong> Pro要<code class="language-plaintext highlighter-rouge">$20/月</code>，Pro+要<code class="language-plaintext highlighter-rouge">$60/月</code></li>
+  <li>国内用需要特殊网络环境，时不时会抽风</li>
+</ul>
+
+<h3 id="适合谁">适合谁？</h3>
+
+<p>每天8小时泡在IDE里的专业开发者。如果你靠写代码吃饭，这个钱值得花。</p>
+
+<hr />
+
+<h2 id="三trae字节的价格屠夫">三、TRAE：字节的“价格屠夫”</h2>
+
+<h3 id="它好在哪-1">它好在哪？</h3>
+
+<p>TRAE是国内最有希望挑战Cursor的选手。核心优势就三个字：<strong>便宜、好用、接地气</strong>。</p>
+
+<h4 id="solo模式是王炸">SOLO模式是王炸</h4>
+
+<p>它有两个AI智能体：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">智能体</th>
+      <th style="text-align: left">功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>SOLO Coder</strong></td>
+      <td style="text-align: left">帮你处理复杂项目的代码迭代、修Bug、重构</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>SOLO Builder</strong></td>
+      <td style="text-align: left">从0到1，一句话生成完整项目</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>实测：输入“做一个TODO List应用，支持用户登录和数据云端存储”，它真的能从需求分析、架构设计、代码编写一路干到部署。<strong>相当于白嫖了一个全栈开发</strong>。</p>
+</blockquote>
+
+<h4 id="豆包seed-code模型也很有诚意">豆包Seed-Code模型也很有诚意</h4>
+
+<ul>
+  <li>上传一张手绘的网页草图，它就能生成可运行的前端代码</li>
+  <li>成本超低，<code class="language-plaintext highlighter-rouge">0-32k tokens</code>的任务只要<code class="language-plaintext highlighter-rouge">0.34元</code>，而Claude要<code class="language-plaintext highlighter-rouge">4.05元</code></li>
+</ul>
+
+<h3 id="槽点在哪-1">槽点在哪？</h3>
+
+<p>部分VSCode插件用不了，比如<code class="language-plaintext highlighter-rouge">Remote SSH</code>。如果你重度依赖某些插件，换过来会有阵痛。</p>
+
+<h3 id="适合谁-1">适合谁？</h3>
+
+<p>国内开发者、预算有限但想用好工具的、想快速从0到1做个产品原型的人。</p>
+
+<blockquote>
+  <p>💡 <strong>小贴士</strong>：TRAE国内版免费，国际版首月<code class="language-plaintext highlighter-rouge">$3</code>次月<code class="language-plaintext highlighter-rouge">$10</code>。国内版用豆包模型够用了，想用Claude就切国际版。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="四文心快码代码洁癖患者的福音">四、文心快码：代码洁癖患者的福音</h2>
+
+<h3 id="它好在哪-2">它好在哪？</h3>
+
+<p>百度的文心快码最大的特点是<strong>SPEC模式</strong>——它会让AI先写设计文档，你确认后再生成代码。这样产出的代码不会成为“别人看不懂的屎山”。</p>
+
+<h4 id="multi-agent矩阵">Multi-Agent矩阵</h4>
+
+<p>三个AI分工合作：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">智能体</th>
+      <th style="text-align: left">职责</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Zulu</strong></td>
+      <td style="text-align: left">负责代码生成</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Plan</strong></td>
+      <td style="text-align: left">负责任务规划</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Architect</strong></td>
+      <td style="text-align: left">负责架构设计</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>IDC评测里C++和Java场景拿了<strong>满分</strong>。</p>
+
+<h4 id="figma2code也很实用">Figma2Code也很实用</h4>
+
+<p>UI设计稿直接生成React/Vue组件，前端开发效率翻倍。</p>
+
+<h3 id="槽点在哪-2">槽点在哪？</h3>
+
+<p>目前完全免费？我没找到付费入口。但百度的产品你懂的，哪天突然收费也不奇怪。</p>
+
+<h3 id="适合谁-2">适合谁？</h3>
+
+<p>团队协作、对代码规范有要求的项目。如果你是那种“看到混乱代码会暴躁”的人，它会拯救你。</p>
+
+<hr />
+
+<h2 id="五其他选手速览">五、其他选手速览</h2>
+
+<h3 id="通义灵码阿里系选手">通义灵码：阿里系选手</h3>
+
+<p>在<strong>Java和Go</strong>场景下表现很强。Quest Mode支持端到端自主编程，单元测试生成准确率行业领先。适合阿里云用户。</p>
+
+<h3 id="腾讯云代码助手小程序神器">腾讯云代码助手：小程序神器</h3>
+
+<p>对微信小程序API的理解准确率达到<strong>98.7%</strong>，永久免费，企业版<code class="language-plaintext highlighter-rouge">936元/人/年</code>。适合小程序开发者。</p>
+
+<h3 id="豆包ai编程零门槛入门">豆包AI编程：零门槛入门</h3>
+
+<p>主打<strong>轻量级+完全免费</strong>，Cloud IDE零配置，浏览器打开就能写代码。适合学生党和初学者。</p>
+
+<hr />
+
+<h2 id="六我的终极建议">六、我的终极建议</h2>
+
+<h3 id="如果你是个人开发者">如果你是个人开发者</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">情况</th>
+      <th style="text-align: left">推荐</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">不差钱</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Cursor Pro</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">想省钱</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TRAE国内版</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">想快速做产品</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TRAE国际版 + SOLO Builder</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="如果你是团队企业">如果你是团队/企业</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">情况</th>
+      <th style="text-align: left">推荐</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">重视代码规范</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">文心快码</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Java/Go技术栈</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">通义灵码</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">小程序开发</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">腾讯云代码助手</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">数据合规要求高</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TRAE企业版</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="终极钞能力方案">终极“钞能力”方案</h3>
+
+<p>Cursor + 文心快码 双持</p>
+
+<ul>
+  <li>Cursor做主力IDE（体验最佳）</li>
+  <li>文心快码做补充（Figma2Code、SPEC模式）</li>
+</ul>
+
+<p>一个管爽，一个管规范。</p>
+
+<p>—— NotYourBoy</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/02/07/deepseek/" data-toggle="tooltip" data-placement="top" title="deepseek">
+                        Previous<br>
+                        <span>deepseek</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://huangxuan.me/">Hux Blog</a></li>
+  
+  <li><a href="http://mida.re/">乱序（Midare）</a></li>
+  
+  <li><a href="https://ebnbin.dev/">Ebn Zhang</a></li>
+  
+  <li><a href="http://kunq.me">Kun Qian</a></li>
+  
+  <li><a href="https://sherrywoo.me/">Sherry Woo</a></li>
+  
+  <li><a href="http://blog.smdcn.net">SmdCn</a></li>
+  
+  <li><a href="http://tiye.me/">JiyinYiyong</a></li>
+  
+  <li><a href="http://dhong.co">DHong Say</a></li>
+  
+  <li><a href="http://ingf.github.io/">尹峰以为</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "ZJP";
+    var disqus_identifier = "/2026/04/08/AICode";
+    var disqus_url = "https://blog.zhangjiapeng.cn/2026/04/08/AICode/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p class="copyright text-muted">
+                    Copyright &copy; NotYourBoy Blog 2026
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/zjp-blog.min.js"></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
