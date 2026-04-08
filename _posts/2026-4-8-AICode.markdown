@@ -160,10 +160,11 @@ UI设计稿直接生成React/Vue组件，前端开发效率翻倍。
 
 ### 终极“钞能力”方案
 
-```
 Cursor + 文心快码 双持
 
 - Cursor做主力IDE（体验最佳）
 - 文心快码做补充（Figma2Code、SPEC模式）
 
 一个管爽，一个管规范。
+
+—— NotYourBoy
