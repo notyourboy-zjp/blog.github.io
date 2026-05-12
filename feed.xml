@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NotYourBoy Blog</title>
+    <description>这里是 @NotYourBoy张佳鹏 的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员</description>
+    <link>https://blog.zhangjiapeng.cn/</link>
+    <atom:link href="https://blog.zhangjiapeng.cn/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 12 May 2026 08:54:19 +0000</pubDate>
+    <lastBuildDate>Tue, 12 May 2026 08:54:19 +0000</lastBuildDate>
+    <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>Agent</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“Agent 面试从底层到实战. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;今年26年，如果想找开发类的工作，基本了解agent已经成为标配了。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Function Call 到底怎么实现的？MCP 解决什么问题？A2A 和 MCP 什么关系？&lt;/p&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;现在无论什么岗位，都要求了解AI、Agent相关内容。2025年起，很多岗位要求Agent经验，2026年开发岗基本了解Agent已成标配。本文把Agent面试知识点从底层到实战讲透，应对面试官深挖。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#1&quot;&gt;LLM 和 Agent 有什么区别？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2&quot;&gt;Agent 和 Workflow 有什么区别？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3&quot;&gt;Agent 有哪些工作模式？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#4&quot;&gt;Function Call 是什么？底层怎么实现？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#5&quot;&gt;MCP 是什么协议？解决什么问题？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#6&quot;&gt;Skills 是什么？和 Prompt 有什么区别？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#7&quot;&gt;Function Call、MCP、Skills 三者区别与协作？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#8&quot;&gt;A2A 协议是什么？和 MCP 的关系？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#9&quot;&gt;Agent 的记忆系统怎么设计？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#10&quot;&gt;Agent 的安全与可靠性如何保障？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#11&quot;&gt;RAG 和 Agent 是什么关系？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#12&quot;&gt;大厂真实面试追问汇总&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p id=&quot;1&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-llm-和-agent-有什么区别&quot;&gt;1. LLM 和 Agent 有什么区别？&lt;/h2&gt;
+
+&lt;h3 id=&quot;面试官常见问法&quot;&gt;面试官常见问法&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;你们项目里用的是 LLM 直接调用还是 Agent？为什么这么选？&lt;/li&gt;
+  &lt;li&gt;Agent 比 LLM 多了什么？如果让你从零设计一个 Agent，你会怎么做？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;llm-本质&quot;&gt;LLM 本质&lt;/h3&gt;
+&lt;p&gt;LLM（大语言模型）是&lt;strong&gt;条件概率模型&lt;/strong&gt;，预测下一个token概率，是无状态函数：输入Prompt，输出文本，无记忆、无状态、对外部无知。&lt;/p&gt;
+
+&lt;h3 id=&quot;llm-四大天花板&quot;&gt;LLM 四大天花板&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;只会说不会做&lt;/strong&gt;：能告知方法，无法自主执行&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;没有记忆&lt;/strong&gt;：上下文窗口满则失忆，跨会话无留存&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;知识截止&lt;/strong&gt;：训练数据有截止日期，无法获取最新信息&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;不会规划&lt;/strong&gt;：无法自主拆解复杂任务&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;agent-本质&quot;&gt;Agent 本质&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Agent = LLM + 工具 + 记忆 + 规划&lt;/strong&gt;，在循环中自主完成目标。&lt;/p&gt;
+
+&lt;h3 id=&quot;案例对比查天气取消跑步计划&quot;&gt;案例对比（查天气+取消跑步计划）&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;角色&lt;/th&gt;
+      &lt;th&gt;实际行为&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LLM&lt;/td&gt;
+      &lt;td&gt;告知查询天气、取消计划的方法，不执行操作&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Agent&lt;/td&gt;
+      &lt;td&gt;调用天气API→查日历→删除计划→直接反馈结果&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;面试加分agent-四模块&quot;&gt;面试加分：Agent 四模块&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;LLM（大脑）&lt;/strong&gt;：理解意图、推理判断&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;规划模块&lt;/strong&gt;：任务拆解、步骤排序&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;记忆模块&lt;/strong&gt;：短期上下文+长期知识存储&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;工具模块&lt;/strong&gt;：调用外部API、数据库等，是“手和脚”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p id=&quot;2&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-agent-和-workflow-有什么区别&quot;&gt;2. Agent 和 Workflow 有什么区别？&lt;/h2&gt;
+
+&lt;h3 id=&quot;核心区别&quot;&gt;核心区别&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Workflow 控制权在代码&lt;/strong&gt;，&lt;strong&gt;Agent 控制权在 LLM&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;workflow-详解&quot;&gt;Workflow 详解&lt;/h3&gt;
+&lt;p&gt;流程提前写死在代码，LLM 仅作为智能节点处理部分任务，步骤顺序、分支逻辑由开发者预定义。
+示例：退款申请→LLM提取信息→查订单→LLM判断→执行退款/拒绝→发通知&lt;/p&gt;
+
+&lt;h3 id=&quot;agent-详解&quot;&gt;Agent 详解&lt;/h3&gt;
+&lt;p&gt;接收目标后&lt;strong&gt;自主规划执行路径&lt;/strong&gt;，每一步由LLM决定，不写死代码，不同任务可走不同路径。&lt;/p&gt;
+
+&lt;h3 id=&quot;量化对比&quot;&gt;量化对比&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;维度&lt;/th&gt;
+      &lt;th&gt;Workflow&lt;/th&gt;
+      &lt;th&gt;Agent&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;控制者&lt;/td&gt;
+      &lt;td&gt;代码/开发者&lt;/td&gt;
+      &lt;td&gt;LLM&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Token消耗&lt;/td&gt;
+      &lt;td&gt;低（约1x）&lt;/td&gt;
+      &lt;td&gt;高（约4-8x）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;可预测性&lt;/td&gt;
+      &lt;td&gt;高&lt;/td&gt;
+      &lt;td&gt;低&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;灵活性&lt;/td&gt;
+      &lt;td&gt;低&lt;/td&gt;
+      &lt;td&gt;高&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;适合任务&lt;/td&gt;
+      &lt;td&gt;固定流程&lt;/td&gt;
+      &lt;td&gt;开放式目标&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;调试难度&lt;/td&gt;
+      &lt;td&gt;容易&lt;/td&gt;
+      &lt;td&gt;困难&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;典型场景&lt;/td&gt;
+      &lt;td&gt;订单处理/报表&lt;/td&gt;
+      &lt;td&gt;研究分析/客服&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;生产实践混合架构最优&quot;&gt;生产实践：混合架构最优&lt;/h3&gt;
+&lt;p&gt;Workflow 提供稳定骨架，Agent 处理异常与复杂情况，兼顾稳定与灵活。&lt;/p&gt;
+
+&lt;p id=&quot;3&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-agent-有哪些工作模式&quot;&gt;3. Agent 有哪些工作模式？&lt;/h2&gt;
+
+&lt;h3 id=&quot;模式一react推理行动默认首选&quot;&gt;模式一：ReAct（推理+行动）【默认首选】&lt;/h3&gt;
+&lt;p&gt;核心循环：&lt;strong&gt;Thought（思考）→Action（行动）→Observation（观察）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;优点：透明可审计、灵活适应、通用性强&lt;/li&gt;
+  &lt;li&gt;缺点：Token消耗大、易死循环、延迟高&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;防死循环面试必背3方法&quot;&gt;防死循环面试必背3方法&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;最大步数限制（通常15步）&lt;/li&gt;
+  &lt;li&gt;重复动作检测（连续3次相同动作直接退出）&lt;/li&gt;
+  &lt;li&gt;超时控制&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ReActAgent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_steps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;steps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;seen_actions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;steps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_steps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;thought&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;llm_think&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;steps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_steps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;达到最大步数限制，任务终止&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seen_actions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;llm_summarize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;工具持续失败，给出答案&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;seen_actions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;observation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;steps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;模式二plan-and-execute先规划再执行&quot;&gt;模式二：Plan-and-Execute（先规划再执行）&lt;/h3&gt;
+&lt;p&gt;解决ReAct Token消耗高问题：&lt;strong&gt;先一次性生成完整计划，再按计划执行&lt;/strong&gt;，可加入重新规划检查点适配偏差，Token消耗约为ReAct的20%。&lt;/p&gt;
+
+&lt;h3 id=&quot;模式三reflection自我反思&quot;&gt;模式三：Reflection（自我反思）&lt;/h3&gt;
+&lt;p&gt;双Agent循环：&lt;strong&gt;生成Agent→审查Agent→迭代优化&lt;/strong&gt;，适用于代码生成、法律文书、学术论文等高要求场景，可校正LLM幻觉。&lt;/p&gt;
+
+&lt;h3 id=&quot;模式四multi-agent多智能体协作&quot;&gt;模式四：Multi-Agent（多智能体协作）&lt;/h3&gt;
+&lt;p&gt;协调Agent+专业Agent分工协作，主流框架：LangGraph、CrewAI、OpenAI SDK、AutoGen。
+&lt;strong&gt;面试提醒&lt;/strong&gt;：不要过早用多Agent，单Agent更稳定省钱，仅任务需并行/分工时引入。&lt;/p&gt;
+
+&lt;p id=&quot;4&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-function-call-是什么底层怎么实现&quot;&gt;4. Function Call 是什么？底层怎么实现？&lt;/h2&gt;
+
+&lt;h3 id=&quot;核心认知&quot;&gt;核心认知&lt;/h3&gt;
+&lt;p&gt;LLM&lt;strong&gt;不执行函数&lt;/strong&gt;，仅输出结构化调用指令，由应用程序实际执行，保障系统安全。&lt;/p&gt;
+
+&lt;h3 id=&quot;四步工作流程&quot;&gt;四步工作流程&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;定义工具&lt;/strong&gt;：向LLM声明可用函数、参数、描述&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;LLM生成指令&lt;/strong&gt;：输出结构化JSON而非普通文本&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;代码解析执行&lt;/strong&gt;：解析指令并调用真实API&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;结果回传LLM&lt;/strong&gt;：生成最终回答&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;parallel-function-call并行调用&quot;&gt;Parallel Function Call（并行调用）&lt;/h3&gt;
+&lt;p&gt;GPT-4o、Claude 3.5+支持一次多工具调用，延迟从T1+T2+T3降至max(T1,T2,T3)。&lt;/p&gt;
+
+&lt;h3 id=&quot;厂商格式对比&quot;&gt;厂商格式对比&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;OpenAI&lt;/th&gt;
+      &lt;th&gt;Anthropic Claude&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;工具定义&lt;/td&gt;
+      &lt;td&gt;tools + function&lt;/td&gt;
+      &lt;td&gt;tools + input_schema&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;调用输出&lt;/td&gt;
+      &lt;td&gt;tool_calls 数组&lt;/td&gt;
+      &lt;td&gt;tool_use content block&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;结果传回&lt;/td&gt;
+      &lt;td&gt;role: “tool”&lt;/td&gt;
+      &lt;td&gt;role: “user” + tool_result&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p id=&quot;5&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;5-mcp-是什么协议解决什么问题&quot;&gt;5. MCP 是什么协议？解决什么问题？&lt;/h2&gt;
+
+&lt;h3 id=&quot;核心问题nm集成爆炸&quot;&gt;核心问题：N×M集成爆炸&lt;/h3&gt;
+&lt;p&gt;无MCP时，N个应用×M个工具需N×M套代码；MCP将其变为N+M，大幅降低维护成本。&lt;/p&gt;
+
+&lt;h3 id=&quot;mcp-架构三角色&quot;&gt;MCP 架构三角色&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;MCP Host&lt;/strong&gt;：AI应用（Claude Desktop、自定义Agent）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MCP Client&lt;/strong&gt;：通信翻译官&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MCP Server&lt;/strong&gt;：工具服务端，第三方服务实现&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;mcp-暴露三类资源&quot;&gt;MCP 暴露三类资源&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tools：可执行操作（发消息、查数据）&lt;/li&gt;
+  &lt;li&gt;Resources：可读数据源（文档、数据库）&lt;/li&gt;
+  &lt;li&gt;Prompts：预设提示词模板&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;核心特性工具动态发现&quot;&gt;核心特性：工具动态发现&lt;/h3&gt;
+&lt;p&gt;Agent启动时扫描Server，自动获取工具列表，新增工具无需重新部署代码。&lt;/p&gt;
+
+&lt;h3 id=&quot;安全设计&quot;&gt;安全设计&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;能力声明：仅调用声明工具&lt;/li&gt;
+  &lt;li&gt;授权控制：敏感操作人工确认&lt;/li&gt;
+  &lt;li&gt;审计追踪：全流程日志可查&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;底层协议&quot;&gt;底层协议&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;本地：stdio&lt;/li&gt;
+  &lt;li&gt;远程：HTTP+SSE&lt;/li&gt;
+  &lt;li&gt;消息：JSON-RPC 2.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p id=&quot;6&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;6-skills-是什么和-prompt-有什么区别&quot;&gt;6. Skills 是什么？和 Prompt 有什么区别？&lt;/h2&gt;
+
+&lt;h3 id=&quot;核心作用&quot;&gt;核心作用&lt;/h3&gt;
+&lt;p&gt;编码领域专家经验，让Agent知道&lt;strong&gt;特定场景该怎么做&lt;/strong&gt;，而非仅调用工具。&lt;/p&gt;
+
+&lt;h3 id=&quot;skills-vs-system-prompt&quot;&gt;Skills vs System Prompt&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;System Prompt&lt;/th&gt;
+      &lt;th&gt;Skills&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;作用范围&lt;/td&gt;
+      &lt;td&gt;全局生效&lt;/td&gt;
+      &lt;td&gt;按需激活、场景触发&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;内容&lt;/td&gt;
+      &lt;td&gt;通用行为规范&lt;/td&gt;
+      &lt;td&gt;特定领域专业指导&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;激活方式&lt;/td&gt;
+      &lt;td&gt;每次加载&lt;/td&gt;
+      &lt;td&gt;匹配触发条件加载&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;可维护性&lt;/td&gt;
+      &lt;td&gt;易臃肿&lt;/td&gt;
+      &lt;td&gt;模块化、独立&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;skill-文件标准结构&quot;&gt;Skill 文件标准结构&lt;/h3&gt;
+&lt;p&gt;身份定位+工作流程+审查标准+输出规范+语气要求，教Agent方法论而非仅格式。&lt;/p&gt;
+
+&lt;h3 id=&quot;激活机制&quot;&gt;激活机制&lt;/h3&gt;
+&lt;p&gt;用户输入→匹配关键词/语义→注入Skill上下文→按规范执行&lt;/p&gt;
+
+&lt;p id=&quot;7&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-function-callmcpskills-三者区别与协作&quot;&gt;7. Function Call、MCP、Skills 三者区别与协作？&lt;/h2&gt;
+
+&lt;h3 id=&quot;通俗类比&quot;&gt;通俗类比&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Function Call：打电话的基础能力&lt;/li&gt;
+  &lt;li&gt;MCP：公司统一通讯录+电话系统&lt;/li&gt;
+  &lt;li&gt;Skills：岗位培训手册&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;技术三维对比&quot;&gt;技术三维对比&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Function Call&lt;/th&gt;
+      &lt;th&gt;MCP&lt;/th&gt;
+      &lt;th&gt;Skills&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;解决问题&lt;/td&gt;
+      &lt;td&gt;LLM调用函数&lt;/td&gt;
+      &lt;td&gt;工具集成标准化&lt;/td&gt;
+      &lt;td&gt;领域知识编码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;运行位置&lt;/td&gt;
+      &lt;td&gt;应用程序&lt;/td&gt;
+      &lt;td&gt;外部Server&lt;/td&gt;
+      &lt;td&gt;Agent上下文&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;技术本质&lt;/td&gt;
+      &lt;td&gt;API协议&lt;/td&gt;
+      &lt;td&gt;通信标准&lt;/td&gt;
+      &lt;td&gt;提示词扩展&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;标准化&lt;/td&gt;
+      &lt;td&gt;厂商不统一&lt;/td&gt;
+      &lt;td&gt;开放统一&lt;/td&gt;
+      &lt;td&gt;无统一标准&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;一句话总结&quot;&gt;一句话总结&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Skills 决定「怎么想」→ MCP 决定「用什么」→ Function Call 决定「怎么调」&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p id=&quot;8&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;8-a2a-协议是什么和-mcp-的关系&quot;&gt;8. A2A 协议是什么？和 MCP 的关系？&lt;/h2&gt;
+
+&lt;h3 id=&quot;核心痛点&quot;&gt;核心痛点&lt;/h3&gt;
+&lt;p&gt;MCP解决&lt;strong&gt;Agent↔工具&lt;/strong&gt;，未解决&lt;strong&gt;Agent↔Agent&lt;/strong&gt;通信（跨框架、能力未知、任务无标准）。&lt;/p&gt;
+
+&lt;h3 id=&quot;a2a-核心概念&quot;&gt;A2A 核心概念&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Agent Card&lt;/strong&gt;：智能体名片，声明能力、地址、认证&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Task&lt;/strong&gt;：标准化任务生命周期（CREATED→PROCESSING→COMPLETED/FAILED）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Message&amp;amp;Artifact&lt;/strong&gt;：过程沟通+成果交付&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;mcp-vs-a2a&quot;&gt;MCP vs A2A&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;MCP&lt;/strong&gt;：纵向，Agent↔工具连接&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;A2A&lt;/strong&gt;：横向，Agent↔Agent协作
+&lt;strong&gt;两者互补，非替代&lt;/strong&gt;：Agent内部用MCP调工具，Agent间用A2A协作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;生态现状&quot;&gt;生态现状&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;MCP：事实标准，生态丰富&lt;/li&gt;
+  &lt;li&gt;A2A：早期快速发展，Google主导&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p id=&quot;9&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;9-agent-的记忆系统怎么设计&quot;&gt;9. Agent 的记忆系统怎么设计？&lt;/h2&gt;
+
+&lt;h3 id=&quot;两层记忆架构&quot;&gt;两层记忆架构&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;上下文记忆（短期）&lt;/strong&gt;：速度最快，容量有限，存当前对话、任务状态&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;外部记忆（长期）&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;向量数据库：用户偏好、语义检索&lt;/li&gt;
+      &lt;li&gt;关系数据库：结构化事实、精确查询&lt;/li&gt;
+      &lt;li&gt;KV存储（Redis）：任务状态、极速读写&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;记忆压缩策略解决窗口溢出&quot;&gt;记忆压缩策略（解决窗口溢出）&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;滑动窗口：丢弃最旧消息&lt;/li&gt;
+  &lt;li&gt;摘要压缩：LLM总结旧对话&lt;/li&gt;
+  &lt;li&gt;重要性过滤：仅保留关键信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;记忆读写时机&quot;&gt;记忆读写时机&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;写入：任务完成、用户信息更新、知识新增、失败复盘&lt;/li&gt;
+  &lt;li&gt;读取：任务开始、问题陌生、事实核查&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AgentMemory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;working_memory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 短期上下文
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector_store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VectorDB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 长期语义
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kv_store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Redis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 状态存储
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;working_memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;token_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAX_TOKENS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;_compress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p id=&quot;10&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;10-agent-的安全与可靠性如何保障&quot;&gt;10. Agent 的安全与可靠性如何保障？&lt;/h2&gt;
+
+&lt;h3 id=&quot;四大安全威胁&quot;&gt;四大安全威胁&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Prompt Injection：恶意指令注入&lt;/li&gt;
+  &lt;li&gt;权限越界：超出操作范围&lt;/li&gt;
+  &lt;li&gt;数据泄露：敏感信息外发&lt;/li&gt;
+  &lt;li&gt;资源滥用：死循环耗成本&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;核心防御&quot;&gt;核心防御&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;最小权限原则&lt;/strong&gt;：仅授予必要权限&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Human in the Loop&lt;/strong&gt;：高风险操作人工审批（删数据、资金操作、改权限）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;prompt-injection-防御&quot;&gt;Prompt Injection 防御&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;数据/指令分离&lt;/li&gt;
+  &lt;li&gt;输入过滤可疑内容&lt;/li&gt;
+  &lt;li&gt;Prompt模板隔离&lt;/li&gt;
+  &lt;li&gt;上下文标记区分数据与指令&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;可靠性设计&quot;&gt;可靠性设计&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;幂等性：重复执行结果一致&lt;/li&gt;
+  &lt;li&gt;回滚机制：重要操作备份可撤销&lt;/li&gt;
+  &lt;li&gt;超时+降级：失败有备用方案&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p id=&quot;11&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;11-rag-和-agent-是什么关系&quot;&gt;11. RAG 和 Agent 是什么关系？&lt;/h2&gt;
+
+&lt;h3 id=&quot;rag-本质&quot;&gt;RAG 本质&lt;/h3&gt;
+&lt;p&gt;检索增强生成，&lt;strong&gt;给LLM补充外部知识&lt;/strong&gt;：检索文档→塞入Prompt→生成回答。&lt;/p&gt;
+
+&lt;h3 id=&quot;rag-vs-agent&quot;&gt;RAG vs Agent&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;RAG&lt;/th&gt;
+      &lt;th&gt;Agent&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;目的&lt;/td&gt;
+      &lt;td&gt;补充知识&lt;/td&gt;
+      &lt;td&gt;完成任务&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;流程&lt;/td&gt;
+      &lt;td&gt;固定（检索→生成）&lt;/td&gt;
+      &lt;td&gt;动态（思考→行动）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;工具&lt;/td&gt;
+      &lt;td&gt;仅检索&lt;/td&gt;
+      &lt;td&gt;任意工具&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;自主性&lt;/td&gt;
+      &lt;td&gt;无&lt;/td&gt;
+      &lt;td&gt;有&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;核心关系&quot;&gt;核心关系&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;RAG 是 Agent 的一个工具&lt;/strong&gt;，Agent可按需调用RAG、API、代码执行器；进阶为&lt;strong&gt;Agentic RAG&lt;/strong&gt;，让RAG自主判断检索策略。&lt;/p&gt;
+
+&lt;p id=&quot;12&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;12-大厂真实面试追问汇总&quot;&gt;12. 大厂真实面试追问汇总&lt;/h2&gt;
+
+&lt;h3 id=&quot;系统设计类&quot;&gt;系统设计类&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;设计企业级Agent系统&lt;/strong&gt;：工具管理、记忆状态、可靠性、可观测性、安全&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;优化Token成本&lt;/strong&gt;：精简工具、换执行模式、上下文压缩、模型路由、结果缓存&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;原理深挖类&quot;&gt;原理深挖类&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Function Call是Agent基石：解决LLM与外部世界交互的核心问题&lt;/li&gt;
+  &lt;li&gt;MCP协议：stdio/HTTP+SSE+JSON-RPC 2.0&lt;/li&gt;
+  &lt;li&gt;Skills vs Few-shot：Few-shot教格式，Skills教方法论&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;工程实践类&quot;&gt;工程实践类&lt;/h3&gt;
+
+&lt;p&gt;生产常见坑：死循环、幻觉工具、上下文污染、Token爆炸、Prompt Injection，对应解法需熟练掌握。&lt;/p&gt;
+
+&lt;h2 id=&quot;写在最后&quot;&gt;写在最后&lt;/h2&gt;
+&lt;p&gt;Agent已从概念变为岗位刚需，面试官看重&lt;strong&gt;底层原理+协议关系+落地设计&lt;/strong&gt;。吃透核心逻辑，即可应对技术栈迭代与面试深挖。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+
+&lt;p&gt;原文链接：&lt;a href=&quot;https://mp.weixin.qq.com/s/eE8PHFRXyTirRMrlJDyZGg&quot;&gt;字节二面，我霸气反问：“你说你们部门做agent项目，说说Function Call、MCP、A2A、ReAct这些你们都是怎么做的”，面试官一直在擦汗。。&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 12 May 2026 18:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2026/05/12/Agent/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2026/05/12/Agent/</guid>
+        
+        <category>Agent</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>2026 AI编程工具实测</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“工欲善其事，必先利其器。”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#结论&quot;&gt;先上结论，再细聊&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;最近好多朋友问我：“现在AI编程工具这么多，到底哪个好用？”&lt;/p&gt;
+
+&lt;p&gt;说实话，2026年的AI编程工具已经不是“哪个补全代码最准”的问题了——每个工具都有自己的脾气和套路。我花时间深度体验了一圈，给大家唠唠我的真实感受。&lt;/p&gt;
+
+&lt;p id=&quot;结论&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;一先说结论三句话选工具&quot;&gt;一、先说结论：三句话选工具&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;你是哪种人&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;闭眼选这个&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;为啥？&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;不差钱、追求极致体验&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Cursor&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;交互最顺滑，用过的都说回不去&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;国内开发者、想省钱&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;TRAE国内版&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;免费够用，还有SOLO模式这个王炸&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;重视代码规范、团队协作&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;文心快码&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;SPEC模式强制先文档后代码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Java/Go选手、阿里云用户&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;通义灵码&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;单测生成强无敌&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;学生党、刚入门、零预算&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;豆包AI编程&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;完全免费，浏览器就能用&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;二cursor贵有贵的道理&quot;&gt;二、Cursor：贵有贵的道理&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;Cursor是我用过&lt;strong&gt;交互最舒服&lt;/strong&gt;的AI IDE。它的AI不是“呼出对话框”才干活，而是像空气一样无处不在——你写代码时它默默补全，你改代码时它自动理解上下文。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cursor 3的“智能体工作区”&lt;/strong&gt; 是2026年最让我惊喜的功能。简单说就是：你可以让AI帮你完成一个复杂的开发任务，然后关掉电脑，第二天换个设备继续，AI还记得上次干到哪了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;跨设备、跨仓库、持续运行，这感觉像多了一个远程队友。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;槽点在哪&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;贵！&lt;/strong&gt; Pro要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$20/月&lt;/code&gt;，Pro+要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$60/月&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;国内用需要特殊网络环境，时不时会抽风&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;适合谁&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;每天8小时泡在IDE里的专业开发者。如果你靠写代码吃饭，这个钱值得花。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;三trae字节的价格屠夫&quot;&gt;三、TRAE：字节的“价格屠夫”&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪-1&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;TRAE是国内最有希望挑战Cursor的选手。核心优势就三个字：&lt;strong&gt;便宜、好用、接地气&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;solo模式是王炸&quot;&gt;SOLO模式是王炸&lt;/h4&gt;
+
+&lt;p&gt;它有两个AI智能体：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;智能体&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;功能&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;SOLO Coder&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;帮你处理复杂项目的代码迭代、修Bug、重构&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;SOLO Builder&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;从0到1，一句话生成完整项目&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;实测：输入“做一个TODO List应用，支持用户登录和数据云端存储”，它真的能从需求分析、架构设计、代码编写一路干到部署。&lt;strong&gt;相当于白嫖了一个全栈开发&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;豆包seed-code模型也很有诚意&quot;&gt;豆包Seed-Code模型也很有诚意&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;上传一张手绘的网页草图，它就能生成可运行的前端代码&lt;/li&gt;
+  &lt;li&gt;成本超低，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0-32k tokens&lt;/code&gt;的任务只要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0.34元&lt;/code&gt;，而Claude要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4.05元&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;槽点在哪-1&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;p&gt;部分VSCode插件用不了，比如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Remote SSH&lt;/code&gt;。如果你重度依赖某些插件，换过来会有阵痛。&lt;/p&gt;
+
+&lt;h3 id=&quot;适合谁-1&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;国内开发者、预算有限但想用好工具的、想快速从0到1做个产品原型的人。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;💡 &lt;strong&gt;小贴士&lt;/strong&gt;：TRAE国内版免费，国际版首月&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$3&lt;/code&gt;次月&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$10&lt;/code&gt;。国内版用豆包模型够用了，想用Claude就切国际版。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;四文心快码代码洁癖患者的福音&quot;&gt;四、文心快码：代码洁癖患者的福音&lt;/h2&gt;
+
+&lt;h3 id=&quot;它好在哪-2&quot;&gt;它好在哪？&lt;/h3&gt;
+
+&lt;p&gt;百度的文心快码最大的特点是&lt;strong&gt;SPEC模式&lt;/strong&gt;——它会让AI先写设计文档，你确认后再生成代码。这样产出的代码不会成为“别人看不懂的屎山”。&lt;/p&gt;
+
+&lt;h4 id=&quot;multi-agent矩阵&quot;&gt;Multi-Agent矩阵&lt;/h4&gt;
+
+&lt;p&gt;三个AI分工合作：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;智能体&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;职责&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Zulu&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责代码生成&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Plan&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责任务规划&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Architect&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;负责架构设计&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;IDC评测里C++和Java场景拿了&lt;strong&gt;满分&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;figma2code也很实用&quot;&gt;Figma2Code也很实用&lt;/h4&gt;
+
+&lt;p&gt;UI设计稿直接生成React/Vue组件，前端开发效率翻倍。&lt;/p&gt;
+
+&lt;h3 id=&quot;槽点在哪-2&quot;&gt;槽点在哪？&lt;/h3&gt;
+
+&lt;p&gt;目前完全免费？我没找到付费入口。但百度的产品你懂的，哪天突然收费也不奇怪。&lt;/p&gt;
+
+&lt;h3 id=&quot;适合谁-2&quot;&gt;适合谁？&lt;/h3&gt;
+
+&lt;p&gt;团队协作、对代码规范有要求的项目。如果你是那种“看到混乱代码会暴躁”的人，它会拯救你。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;五其他选手速览&quot;&gt;五、其他选手速览&lt;/h2&gt;
+
+&lt;h3 id=&quot;通义灵码阿里系选手&quot;&gt;通义灵码：阿里系选手&lt;/h3&gt;
+
+&lt;p&gt;在&lt;strong&gt;Java和Go&lt;/strong&gt;场景下表现很强。Quest Mode支持端到端自主编程，单元测试生成准确率行业领先。适合阿里云用户。&lt;/p&gt;
+
+&lt;h3 id=&quot;腾讯云代码助手小程序神器&quot;&gt;腾讯云代码助手：小程序神器&lt;/h3&gt;
+
+&lt;p&gt;对微信小程序API的理解准确率达到&lt;strong&gt;98.7%&lt;/strong&gt;，永久免费，企业版&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;936元/人/年&lt;/code&gt;。适合小程序开发者。&lt;/p&gt;
+
+&lt;h3 id=&quot;豆包ai编程零门槛入门&quot;&gt;豆包AI编程：零门槛入门&lt;/h3&gt;
+
+&lt;p&gt;主打&lt;strong&gt;轻量级+完全免费&lt;/strong&gt;，Cloud IDE零配置，浏览器打开就能写代码。适合学生党和初学者。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;六我的终极建议&quot;&gt;六、我的终极建议&lt;/h2&gt;
+
+&lt;h3 id=&quot;如果你是个人开发者&quot;&gt;如果你是个人开发者&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;情况&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;推荐&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;不差钱&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cursor Pro&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;想省钱&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE国内版&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;想快速做产品&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE国际版 + SOLO Builder&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;如果你是团队企业&quot;&gt;如果你是团队/企业&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;情况&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;推荐&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;重视代码规范&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;文心快码&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Java/Go技术栈&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;通义灵码&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;小程序开发&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;腾讯云代码助手&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;数据合规要求高&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRAE企业版&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;终极钞能力方案&quot;&gt;终极“钞能力”方案&lt;/h3&gt;
+
+&lt;p&gt;Cursor + 文心快码 双持&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cursor做主力IDE（体验最佳）&lt;/li&gt;
+  &lt;li&gt;文心快码做补充（Figma2Code、SPEC模式）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个管爽，一个管规范。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Wed, 08 Apr 2026 21:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2026/04/08/AICode/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2026/04/08/AICode/</guid>
+        
+        <category>AI</category>
+        
+        <category>编程工具</category>
+        
+        <category>Cursor</category>
+        
+        <category>TRAE</category>
+        
+        <category>文心快码</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>deepseek</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“AI 已来. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;回家过个春节，总应该写点什么 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;DeepSeek国产大模型震荡整个AI行业：程序员视角下的思考与对比&lt;/p&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;作为一名程序员，我对人工智能一直有着浓厚的兴趣。近年来，AI技术的飞速发展让我深感震撼，尤其是大模型的出现，更是为软件开发和应用带来了全新的可能性。最近，DeepSeek国产大模型的崛起引起了我的极大关注。它不仅在技术上取得了突破，更在开源策略和成本控制方面为程序员群体带来了前所未有的机遇。以下是我从程序员的角度对DeepSeek的一些思考和看法，同时结合了与OpenAI的ChatGPT和Google的Gemini的对比分析。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;deepseekopenai和gemini的对比&quot;&gt;DeepSeek、OpenAI和Gemini的对比&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;技术架构&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：采用混合架构，结合深度学习与强化学习技术，注重高效性和灵活性。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：基于Transformer架构，以强大的语言生成能力和上下文理解能力著称。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态AI模型，能够处理文本、图像、音频和视频等多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;多模态能力&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：主要基于文本，但可以通过与其他工具集成实现多模态功能。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：主要以文本为基础，无法处理或生成图像、音频或视频。&lt;/li&gt;
+  &lt;li&gt;Gemini：完全多模态，能够处理和生成多种数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;性能与效率&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：在计算效率上表现优异，适合资源有限的环境。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：在文本任务上表现出色，但对计算资源需求较大。&lt;/li&gt;
+  &lt;li&gt;Gemini：在多模态任务中表现突出，但需要显著的计算能力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;应用场景&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：适合企业级应用，如数据分析、领域特定的聊天机器人。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：广泛应用于内容创作、客户支持、编码辅助等通用任务。&lt;/li&gt;
+  &lt;li&gt;Gemini：适合科学研究、多媒体内容生成和复杂问题解决。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;开源与定制化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek：开源特性使其易于集成到企业系统中，并支持领域特定的定制化。&lt;/li&gt;
+  &lt;li&gt;OpenAI（ChatGPT）：提供API用于集成，但在特定领域的定制化方面有限。&lt;/li&gt;
+  &lt;li&gt;Gemini：多模态应用的定制化程度高，但可能需要专门的知识。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deepseek的优势与挑战&quot;&gt;DeepSeek的优势与挑战&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;优势&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;高效性与成本效益：DeepSeek在计算效率和成本控制方面表现出色，适合大规模企业级部署。&lt;/li&gt;
+  &lt;li&gt;开源与定制化：开源特性使开发者可以自由定制和优化模型，推动技术的快速迭代。&lt;/li&gt;
+  &lt;li&gt;多语言支持：在中文语境下表现优异，生成的文本更加符合中文表达习惯。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;挑战&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;多模态能力不足：在图像和视频处理方面，DeepSeek的性能略逊于Gemini。&lt;/li&gt;
+  &lt;li&gt;国际竞争压力：作为新兴的国际竞争者，DeepSeek需要在国际市场上进一步提升品牌影响力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;未来展望&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek的崛起为AI行业带来了新的发展机遇。其低成本和开源的特点有望推动AI应用的普及，促进更多创新应用的出现。同时，DeepSeek的成功也为其他国家的科技企业提供了追赶的机会，推动了全球科技合作的可能性。作为一名程序员，我期待看到更多像DeepSeek这样的开源项目出现。开源不仅能够加速技术的发展，还能够促进全球开发者之间的交流与合作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;结语&quot;&gt;结语&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepSeek国产大模型的崛起不仅在技术上取得了突破，还在商业和生态层面引发了行业震荡。其低成本、高性能和开源的特点，为AI行业带来了新的发展方向。作为一名程序员，我深感这一事件的重要性和深远影响。DeepSeek的出现为我和其他开发者提供了更多的机会和可能性，让我们能够以更低的成本探索AI技术的边界。未来，随着DeepSeek的不断发展，其对全球AI行业的影响将更加深远。我期待看到更多像DeepSeek这样的创新力量，推动行业不断向前发展。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;应用那句话，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;淘汰程序员的不是AI，而是不会用AI的程序员&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;所以，拥抱AI，拥抱开源，拥抱未来。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Feb 2025 21:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/02/07/deepseek/</guid>
+        
+        <category>AI -deepseek</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello 2025</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“Yeah It’s on. ”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;NotYourBoy 的 Blog 就这么开通了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#build&quot;&gt;跳过废话，直接看技术实现 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2025 年，NotYourBoy 总算有个地方可以好好写点东西了。&lt;/p&gt;
+
+&lt;p&gt;作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。&lt;/p&gt;
+
+&lt;p id=&quot;build&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;p&gt;接下来说说搭建这个博客的技术细节。&lt;/p&gt;
+
+&lt;p&gt;正好之前就有关注过 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速 Building Blog 的技术方案，非常轻松时尚。&lt;/p&gt;
+
+&lt;p&gt;其优点非常明显：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Markdown&lt;/strong&gt; 带来的优雅写作体验&lt;/li&gt;
+  &lt;li&gt;非常熟悉的 Git workflow ，&lt;strong&gt;Git Commit 即 Blog Post&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
+    &lt;ul&gt;
+      &lt;li&gt;如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Jekyll 的自定制非常容易，基本就是个模版引擎&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本来觉得最大的缺点可能是 GitHub 在国内访问起来太慢，所以第二天一起床就到 GitCafe(Chinese GitHub Copy，现在被 Coding 收购了) 迁移了一个&lt;a href=&quot;http://NotYourBoypro.coding.me&quot;&gt;镜像&lt;/a&gt;出来，结果还是巨慢。&lt;/p&gt;
+
+&lt;p&gt;哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 &lt;strong&gt;pending 在了 Google Fonts&lt;/strong&gt; 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。&lt;br /&gt;
+忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手&lt;/p&gt;
+
+&lt;p&gt;大的 Jekyll 主题上直接 fork 了 Clean Blog（这个主题也相当有名，就不多赘述了。唯一的缺点大概就是没有标签支持，于是我给它补上了。）&lt;/p&gt;
+
+&lt;p&gt;本地调试环境需要 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install jekyll&lt;/code&gt;，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功&lt;/p&gt;
+
+&lt;p&gt;Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 SCSS 些），&lt;strong&gt;不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在淘宝参与的团队 CSS 框架差多了……&lt;/strong&gt;所以为了体验，也补了不少 CSS 进去&lt;/p&gt;
+
+&lt;p&gt;最后就进入了耗时反而最长的&lt;strong&gt;做图、写字&lt;/strong&gt;阶段，也算是进入了&lt;strong&gt;写博客&lt;/strong&gt;的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。&lt;/p&gt;
+
+&lt;p&gt;第二天考虑中文字体的渲染，fork 了 &lt;a href=&quot;http://www.typeisbeautiful.com/&quot;&gt;Type is Beautiful&lt;/a&gt; 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;font&lt;/code&gt; CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。&lt;/p&gt;
+
+&lt;h2 id=&quot;后记&quot;&gt;后记&lt;/h2&gt;
+
+&lt;p&gt;回顾这个博客的诞生，纯粹是出于个人兴趣。在知乎相关问题上回答并获得一定的 star 后，我决定把这个博客主题当作一个小小的开源项目来维护。&lt;/p&gt;
+
+&lt;p&gt;在经历 v1.0 - v1.5 的蜕变后，这个博客主题愈发完整，不但增加了诸多 UI 层的优化（opinionated）；在代码层面，更加丰富的配置项也使得这个主题拥有了更好的灵活性与可拓展性。而作为一个开源项目，我也积极的为其完善文档与解决 issue。&lt;/p&gt;
+
+&lt;p&gt;如果你恰好逛到了这里，希望你也能喜欢这个博客主题。&lt;/p&gt;
+
+&lt;p&gt;—— NotYourBoy&lt;/p&gt;
+</description>
+        <pubDate>Fri, 03 Jan 2025 12:00:00 +0000</pubDate>
+        <link>https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</link>
+        <guid isPermaLink="true">https://blog.zhangjiapeng.cn/2025/01/03/hello-2025/</guid>
+        
+        <category>Meta</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
