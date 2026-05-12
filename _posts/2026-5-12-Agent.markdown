@@ -38,7 +38,6 @@ Function Call 到底怎么实现的？MCP 解决什么问题？A2A 和 MCP 什�
 11. [RAG 和 Agent 是什么关系？](#11)
 12. [大厂真实面试追问汇总](#12)
 
----
 
 <p id = "1"></p>
 
@@ -73,7 +72,6 @@ LLM（大语言模型）是**条件概率模型**，预测下一个token概率�
 3. **记忆模块**：短期上下文+长期知识存储
 4. **工具模块**：调用外部API、数据库等，是“手和脚”
 
----
 
 <p id = "2"></p>
 
@@ -104,7 +102,6 @@ LLM（大语言模型）是**条件概率模型**，预测下一个token概率�
 ### 生产实践：混合架构最优
 Workflow 提供稳定骨架，Agent 处理异常与复杂情况，兼顾稳定与灵活。
 
----
 
 <p id = "3"></p>
 
@@ -146,7 +143,7 @@ class ReActAgent:
 协调Agent+专业Agent分工协作，主流框架：LangGraph、CrewAI、OpenAI SDK、AutoGen。
 **面试提醒**：不要过早用多Agent，单Agent更稳定省钱，仅任务需并行/分工时引入。
 
----
+
 
 <p id = "4"></p>
 
@@ -172,7 +169,7 @@ GPT-4o、Claude 3.5+支持一次多工具调用，延迟从T1+T2+T3降至max(T1,
 | 调用输出 | tool_calls 数组 | tool_use content block |
 | 结果传回 | role: "tool" | role: "user" + tool_result |
 
----
+
 
 <p id = "5"></p>
 
@@ -204,7 +201,7 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 - 远程：HTTP+SSE
 - 消息：JSON-RPC 2.0
 
----
+
 
 <p id = "6"></p>
 
@@ -228,7 +225,7 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 ### 激活机制
 用户输入→匹配关键词/语义→注入Skill上下文→按规范执行
 
----
+
 
 <p id = "7"></p>
 
@@ -251,7 +248,7 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 ### 一句话总结
 **Skills 决定「怎么想」→ MCP 决定「用什么」→ Function Call 决定「怎么调」**
 
----
+
 
 <p id = "8"></p>
 
@@ -274,7 +271,7 @@ MCP解决**Agent↔工具**，未解决**Agent↔Agent**通信（跨框架、能
 - MCP：事实标准，生态丰富
 - A2A：早期快速发展，Google主导
 
----
+
 
 <p id = "9"></p>
 
@@ -308,7 +305,7 @@ class AgentMemory:
             self._compress()
 ```
 
----
+
 
 <p id = "10"></p>
 
@@ -335,7 +332,7 @@ class AgentMemory:
 - 回滚机制：重要操作备份可撤销
 - 超时+降级：失败有备用方案
 
----
+
 
 <p id = "11"></p>
 
@@ -356,7 +353,7 @@ class AgentMemory:
 ### 核心关系
 **RAG 是 Agent 的一个工具**，Agent可按需调用RAG、API、代码执行器；进阶为**Agentic RAG**，让RAG自主判断检索策略。
 
----
+
 
 <p id = "12"></p>
 
@@ -376,12 +373,13 @@ class AgentMemory:
 
 生产常见坑：死循环、幻觉工具、上下文污染、Token爆炸、Prompt Injection，对应解法需熟练掌握。
 
----
+
+
+
 
 ## 写在最后
-Agent已从概念变为岗位刚需，面试官看重**底层原理+协议关系+落地设计**。吃透核心
+Agent已从概念变为岗位刚需，面试官看重**底层原理+协议关系+落地设计**。吃透核心逻辑，即可应对技术栈迭代与面试深挖。
 
 —— NotYourBoy
-逻辑，即可应对技术栈迭代与面试深挖。
 
 原文链接：[字节二面，我霸气反问：“你说你们部门做agent项目，说说Function Call、MCP、A2A、ReAct这些你们都是怎么做的”，面试官一直在擦汗。。](https://mp.weixin.qq.com/s/eE8PHFRXyTirRMrlJDyZGg)
