@@ -2,7 +2,7 @@
 layout:     post
 title:      "Agent"
 subtitle:   " \"Agent 面试从底层到实战\""
-date:       2025-05-12 18:00:00
+date:       2026-05-12 18:00:00
 author:     "NotYourBoy"
 header-img: "img/post-bg-universe.jpg"
 catalog: true
@@ -25,25 +25,27 @@ Function Call 到底怎么实现的？MCP 解决什么问题？A2A 和 MCP 什�
 
 ## 目录
 
-1. [LLM 和 Agent 有什么区别？](#1-llm-和-agent-有什么区别)
-2. [Agent 和 Workflow 有什么区别？](#2-agent-和-workflow-有什么区别)
-3. [Agent 有哪些工作模式？](#3-agent-有哪些工作模式)
-4. [Function Call 是什么？底层怎么实现？](#4-function-call-是什么底层怎么实现)
-5. [MCP 是什么协议？解决什么问题？](#5-mcp-是什么协议解决什么问题)
-6. [Skills 是什么？和 Prompt 有什么区别？](#6-skills-是什么和-prompt-有什么区别)
-7. [Function Call、MCP、Skills 三者区别与协作？](#7-function-callmcpskills-三者区别与协作)
-8. [A2A 协议是什么？和 MCP 的关系？](#8-a2a-协议是什么和-mcp-的关系)
-9. [Agent 的记忆系统怎么设计？](#9-agent-的记忆系统怎么设计)
-10. [Agent 的安全与可靠性如何保障？](#10-agent-的安全与可靠性如何保障)
-11. [RAG 和 Agent 是什么关系？](#11-rag-和-agent-是什么关系)
-12. [大厂真实面试追问汇总](#12-大厂真实面试追问汇总)
-    - [系统设计类](#系统设计类)
-    - [原理深挖类](#原理深挖类)
-    - [工程实践类](#工程实践类)
+1. [LLM 和 Agent 有什么区别？](#1)
+2. [Agent 和 Workflow 有什么区别？](#2)
+3. [Agent 有哪些工作模式？](#3)
+4. [Function Call 是什么？底层怎么实现？](#4)
+5. [MCP 是什么协议？解决什么问题？](#5)
+6. [Skills 是什么？和 Prompt 有什么区别？](#6)
+7. [Function Call、MCP、Skills 三者区别与协作？](#7)
+8. [A2A 协议是什么？和 MCP 的关系？](#8)
+9. [Agent 的记忆系统怎么设计？](#9)
+10. [Agent 的安全与可靠性如何保障？](#10)
+11. [RAG 和 Agent 是什么关系？](#11)
+12. [大厂真实面试追问汇总](#12)
+    - [系统设计类](#12-1)
+    - [原理深挖类](#12-2)
+    - [工程实践类](#12-3)
 
 ---
 
-<h2 id="1-llm-和-agent-有什么区别">1. LLM 和 Agent 有什么区别？</h2>
+<p id = "1"></p>
+
+## 1. LLM 和 Agent 有什么区别？
 
 ### 面试官常见问法
 - 你们项目里用的是 LLM 直接调用还是 Agent？为什么这么选？
@@ -75,7 +77,9 @@ LLM（大语言模型）是**条件概率模型**，预测下一个token概率�
 
 ---
 
-<h2 id="2-agent-和-workflow-有什么区别">2. Agent 和 Workflow 有什么区别？</h2>
+<p id = "2"></p>
+
+## 2. Agent 和 Workflow 有什么区别？
 
 ### 核心区别
 **Workflow 控制权在代码**，**Agent 控制权在 LLM**。
@@ -103,7 +107,9 @@ Workflow 提供稳定骨架，Agent 处理异常与复杂情况，兼顾稳定�
 
 ---
 
-<h2 id="3-agent-有哪些工作模式">3. Agent 有哪些工作模式？</h2>
+<p id = "3"></p>
+
+## 3. Agent 有哪些工作模式？
 
 ### 模式一：ReAct（推理+行动）【默认首选】
 核心循环：**Thought（思考）→Action（行动）→Observation（观察）**
@@ -143,7 +149,9 @@ class ReActAgent:
 
 ---
 
-<h2 id="4-function-call-是什么底层怎么实现">4. Function Call 是什么？底层怎么实现？</h2>
+<p id = "4"></p>
+
+## 4. Function Call 是什么？底层怎么实现？
 
 ### 核心认知
 LLM**不执行函数**，仅输出结构化调用指令，由应用程序实际执行，保障系统安全。
@@ -166,7 +174,9 @@ GPT-4o、Claude 3.5+支持一次多工具调用，延迟从T1+T2+T3降至max(T1,
 
 ---
 
-<h2 id="5-mcp-是什么协议解决什么问题">5. MCP 是什么协议？解决什么问题？</h2>
+<p id = "5"></p>
+
+## 5. MCP 是什么协议？解决什么问题？
 
 ### 核心问题：N×M集成爆炸
 无MCP时，N个应用×M个工具需N×M套代码；MCP将其变为N+M，大幅降低维护成本。
@@ -196,7 +206,9 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 
 ---
 
-<h2 id="6-skills-是什么和-prompt-有什么区别">6. Skills 是什么？和 Prompt 有什么区别？</h2>
+<p id = "6"></p>
+
+## 6. Skills 是什么？和 Prompt 有什么区别？
 
 ### 核心作用
 编码领域专家经验，让Agent知道**特定场景该怎么做**，而非仅调用工具。
@@ -217,7 +229,9 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 
 ---
 
-<h2 id="7-function-callmcpskills-三者区别与协作">7. Function Call、MCP、Skills 三者区别与协作？</h2>
+<p id = "7"></p>
+
+## 7. Function Call、MCP、Skills 三者区别与协作？
 
 ### 通俗类比
 - Function Call：打电话的基础能力
@@ -237,7 +251,9 @@ Agent启动时扫描Server，自动获取工具列表，新增工具无需重新
 
 ---
 
-<h2 id="8-a2a-协议是什么和-mcp-的关系">8. A2A 协议是什么？和 MCP 的关系？</h2>
+<p id = "8"></p>
+
+## 8. A2A 协议是什么？和 MCP 的关系？
 
 ### 核心痛点
 MCP解决**Agent↔工具**，未解决**Agent↔Agent**通信（跨框架、能力未知、任务无标准）。
@@ -258,7 +274,9 @@ MCP解决**Agent↔工具**，未解决**Agent↔Agent**通信（跨框架、能
 
 ---
 
-<h2 id="9-agent-的记忆系统怎么设计">9. Agent 的记忆系统怎么设计？</h2>
+<p id = "9"></p>
+
+## 9. Agent 的记忆系统怎么设计？
 
 ### 两层记忆架构
 1. **上下文记忆（短期）**：速度最快，容量有限，存当前对话、任务状态
@@ -290,7 +308,9 @@ class AgentMemory:
 
 ---
 
-<h2 id="10-agent-的安全与可靠性如何保障">10. Agent 的安全与可靠性如何保障？</h2>
+<p id = "10"></p>
+
+## 10. Agent 的安全与可靠性如何保障？
 
 ### 四大安全威胁
 1. Prompt Injection：恶意指令注入
@@ -315,7 +335,9 @@ class AgentMemory:
 
 ---
 
-<h2 id="11-rag-和-agent-是什么关系">11. RAG 和 Agent 是什么关系？</h2>
+<p id = "11"></p>
+
+## 11. RAG 和 Agent 是什么关系？
 
 ### RAG 本质
 检索增强生成，**给LLM补充外部知识**：检索文档→塞入Prompt→生成回答。
@@ -333,26 +355,36 @@ class AgentMemory:
 
 ---
 
-<h2 id="12-大厂真实面试追问汇总">12. 大厂真实面试追问汇总</h2>
-<h3 id="系统设计类">系统设计类</h3>
+<p id = "12"></p>
+
+## 12. 大厂真实面试追问汇总
+
+<p id = "12-1"></p>
+
+### 系统设计类
 
 1. **设计企业级Agent系统**：工具管理、记忆状态、可靠性、可观测性、安全
 2. **优化Token成本**：精简工具、换执行模式、上下文压缩、模型路由、结果缓存
 
-<h3 id="原理深挖类">原理深挖类</h3>
+<p id = "12-2"></p>
+
+### 原理深挖类
 1. Function Call是Agent基石：解决LLM与外部世界交互的核心问题
 2. MCP协议：stdio/HTTP+SSE+JSON-RPC 2.0
 3. Skills vs Few-shot：Few-shot教格式，Skills教方法论
 
-<h3 id="工程实践类">工程实践类</h3>
+<p id = "12-3"></p>
+
+### 工程实践类
 
 生产常见坑：死循环、幻觉工具、上下文污染、Token爆炸、Prompt Injection，对应解法需熟练掌握。
 
 ---
 
 ## 写在最后
-Agent已从概念变为岗位刚需，面试官看重**底层原理+协议关系+落地设计**。吃透核心逻辑，即可应对技术栈迭代与面试深挖。
-
-原文链接：[字节二面，我霸气反问：“你说你们部门做agent项目，说说Function Call、MCP、A2A、ReAct这些你们都是怎么做的”，面试官一直在擦汗。。](https://mp.weixin.qq.com/s/eE8PHFRXyTirRMrlJDyZGg)
+Agent已从概念变为岗位刚需，面试官看重**底层原理+协议关系+落地设计**。吃透核心
 
 —— NotYourBoy
+逻辑，即可应对技术栈迭代与面试深挖。
+
+原文链接：[字节二面，我霸气反问：“你说你们部门做agent项目，说说Function Call、MCP、A2A、ReAct这些你们都是怎么做的”，面试官一直在擦汗。。](https://mp.weixin.qq.com/s/eE8PHFRXyTirRMrlJDyZGg)
